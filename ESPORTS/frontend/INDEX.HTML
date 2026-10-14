@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gerencie suas equipes de eSports: jogos, jogadores e regiões em um só lugar.">
+    <title>Arena — Equipes de eSports</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+    <header class="header">
+        <a class="brand" href="#inicio" aria-label="Arena eSports, início"><span class="brand-icon" aria-hidden="true">A<span>／</span></span><span>ARENA<span class="brand-sub">ESPORTS MANAGEMENT</span></span></a>
+        <nav aria-label="Navegação principal"><a class="nav-active" href="#equipes">Equipes <span class="nav-dot"></span></a><a href="#sobre">Sobre o sistema <span aria-hidden="true">↗</span></a></nav>
+        <span class="header-label">O próximo nível começa aqui.</span>
+    </header>
+    <main id="conteudo">
+        <section class="hero" id="inicio" aria-labelledby="hero-title">
+            <div class="hero-copy"><p class="eyebrow"><span class="orange-line"></span> SUA CENTRAL DE ESPORTS</p><h1 id="hero-title">GRANDES JOGOS.<br>GRANDES <span>EQUIPES.</span></h1><p class="hero-description">Organize seu elenco. Conecte regiões.<br>Prepare sua equipe para a próxima partida.</p><a class="button primary" href="#equipes">Gerenciar equipes <span aria-hidden="true">↗</span></a><span class="hero-footnote">Toda equipe começa com uma boa organização.</span></div>
+            <div class="arena-art" aria-hidden="true"><div class="art-grid"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="art-symbol">A<span>／</span></div><span class="art-top">COMPETIÇÃO É CONEXÃO</span><span class="art-bottom">BUILD YOUR TEAM. <b>OWN THE GAME.</b></span><span class="art-coordinate">01 / ARENA</span></div>
+        </section>
+        <section class="stats" aria-label="Resumo das equipes">
+            <div><span class="stat-label">EQUIPES CADASTRADAS</span><strong id="total-equipes">—</strong><span>Prontas para fazer história</span></div>
+            <div><span class="stat-label">JOGADORES INFORMADOS</span><strong id="total-jogadores">—</strong><span>Talento que faz a diferença</span></div>
+            <div><span class="stat-label">JOGOS REPRESENTADOS</span><strong id="total-jogos">—</strong><span>Diferentes arenas, a mesma paixão</span></div>
+            <div><span class="stat-label">REGIÕES REPRESENTADAS</span><strong id="total-regioes">—</strong><span>Conectando a comunidade</span></div>
+        </section>
+        <section class="teams-section" id="equipes" aria-labelledby="teams-title">
+            <div class="section-heading"><div><p class="eyebrow">O JOGO É COLETIVO</p><h2 id="teams-title">Sua próxima formação.</h2><p>Cadastre, encontre e gerencie suas equipes.</p></div><button class="button primary" id="nova-equipe" type="button"><span aria-hidden="true">＋</span> Nova equipe</button></div>
+            <div id="mensagem" class="message" role="status" aria-live="polite" hidden></div>
+            <div class="toolbar"><div class="search-box"><span aria-hidden="true">⌕</span><label class="sr-only" for="busca">Buscar equipe, tag ou região</label><input id="busca" type="search" placeholder="Buscar equipe, tag ou região..."></div><label class="filter-label" for="filtro-jogo">Jogo <select id="filtro-jogo"><option value="">Todos os jogos</option></select></label><button class="button subtle" id="recarregar" type="button" aria-label="Atualizar equipes">↻ <span>Atualizar</span></button></div>
+            <div class="list-meta"><span id="resultado-contagem" aria-live="polite">Carregando equipes...</span><span class="list-caption">SEU ELENCO, SOB CONTROLE</span></div>
+            <div class="table-wrap"><table><caption class="sr-only">Equipes de eSports cadastradas</caption><thead><tr><th scope="col">EQUIPE</th><th scope="col">JOGO</th><th scope="col">JOGADORES</th><th scope="col">REGIÃO</th><th scope="col" class="actions-heading">AÇÕES</th></tr></thead><tbody id="lista-equipes"></tbody></table><div class="empty-state" id="estado-lista" role="status">Buscando suas equipes...</div></div>
+        </section>
+        <section class="about" id="sobre"><div><p class="eyebrow">DA ORGANIZAÇÃO À COMPETIÇÃO</p><h2>O talento entra em campo.<br><span>A organização faz o resto.</span></h2></div><p>A Arena reúne as informações das suas equipes em um só lugar. Gerencie nome, jogo, jogadores e região para dedicar mais tempo ao que importa: jogar em equipe.</p></section>
+    </main>
+    <footer><a class="footer-brand" href="#inicio">ARENA<span> / ESPORTS</span></a><p>Feito para quem leva o jogo a sério.</p><a href="#inicio">Voltar ao topo ↑</a></footer>
+    <dialog id="modal-equipe" aria-labelledby="form-title"><div class="dialog-heading"><div><p class="eyebrow">SEU TIME NA ARENA</p><h2 id="form-title">Nova equipe</h2></div><button class="close-button" id="fechar-modal" type="button" aria-label="Fechar formulário">×</button></div><p class="dialog-description">Preencha os dados da equipe. Apenas a cidade é opcional.</p><form id="form-equipe"><fieldset id="campos-equipe"><input type="hidden" id="equipe-id"><div class="form-grid"><label class="full">Nome da equipe<input id="nome" name="nome" maxlength="100" required placeholder="Ex.: Aurora Gaming"></label><label>Tag<input id="tag" name="tag" maxlength="10" required placeholder="Ex.: AUR"></label><label>Jogo<input id="jogo" name="jogo" maxlength="80" required list="sugestoes-jogos" placeholder="Ex.: Valorant"><datalist id="sugestoes-jogos"><option value="Valorant"><option value="League of Legends"><option value="Counter-Strike 2"><option value="Rocket League"><option value="EA Sports FC"></datalist></label><label>Quantidade de jogadores<input id="quantidade_jogadores" name="quantidade_jogadores" type="number" min="1" max="2147483647" step="1" required placeholder="Ex.: 5"></label><label>Região<input id="regiao" name="regiao" maxlength="50" required list="sugestoes-regioes" placeholder="Ex.: Sul"><datalist id="sugestoes-regioes"><option value="Sul"><option value="Sudeste"><option value="Centro-Oeste"><option value="Nordeste"><option value="Norte"></datalist></label><label class="full">Cidade <span class="optional">(opcional)</span><input id="cidade" name="cidade" maxlength="100" placeholder="Ex.: Santa Cruz do Sul"></label></div></fieldset><p id="erro-form" class="form-error" role="alert" hidden></p><div class="dialog-actions"><button class="button subtle" id="cancelar-form" type="button">Cancelar</button><button class="button primary" id="salvar-equipe" type="submit">Cadastrar equipe <span aria-hidden="true">↗</span></button></div></form></dialog>
+    <dialog id="modal-excluir" aria-labelledby="excluir-title"><p class="eyebrow">GERENCIAR EQUIPE</p><h2 id="excluir-title">Excluir equipe?</h2><p id="excluir-descricao"></p><p class="dialog-description">Esta ação remove o cadastro permanentemente. Equipes com registros vinculados não podem ser excluídas.</p><p id="erro-excluir" class="form-error" role="alert" hidden></p><div class="dialog-actions"><button class="button subtle" id="cancelar-exclusao" type="button">Cancelar</button><button class="button danger" id="confirmar-exclusao" type="button">Excluir equipe</button></div></dialog>
+</body>
+</html>
